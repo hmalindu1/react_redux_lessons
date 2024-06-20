@@ -15,6 +15,8 @@ const PostsList = () => {
   const error = useSelector(getPostError);
   const dispatch = useDispatch();
 
+  console.log("posts", posts);
+
   useEffect(() => {
     if (postStatus === "idle") {
       dispatch(fetchPosts());
@@ -27,7 +29,7 @@ const PostsList = () => {
   } else if (postStatus === "succeeded") {
     const orderedPosts = posts
       .slice()
-      .sort((a, b) => b.date.localeCompare(a.date));
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     content = orderedPosts.map((post) => (
       <PostExcerpt key={post.id} post={post} />
     ));
