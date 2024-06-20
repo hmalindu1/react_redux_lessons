@@ -3,10 +3,10 @@ import axios from "axios";
 
 const USER_URL = "http://localhost:3000/users";
 
-export const fetchUsers = createAsyncThunk("posts/fetchUsers", async () => {
+export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
   const response = await axios.get(USER_URL);
   if (response.status !== 200) {
-    throw new Error("Failed to fetch posts");
+    throw new Error("Failed to fetch users");
   }
   return response.data;
 });
