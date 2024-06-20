@@ -36,25 +36,6 @@ const postsSlice = createSlice({
   name: "posts",
   initialState: initialState,
   reducers: {
-    postAdded: (state, action) => {
-      const { title, content, userId } = action.payload;
-
-      state.posts.push({
-        id: nanoid(),
-        title,
-        content,
-        date: new Date().toISOString(),
-        userId,
-        reactions: { thumbsUp: 0, wow: 0, heart: 0, rocket: 0, coffee: 0 },
-      });
-
-      console.log(
-        "State from `postAdded`",
-        state,
-        " and Action from `postAdded`",
-        action
-      );
-    },
     reactionAdded: (state, action) => {
       const { postId, reaction } = action.payload;
       const existingPost = state.posts.find((post) => post.id === postId);
@@ -71,24 +52,11 @@ const postsSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.status = "succeeded";
-        // Adding date and reactions
-        let min = 1;
-        const loadedPosts = Array.isArray(action.payload)
-          ? action.payload.map((post) => {
-              post.date = sub(new Date(), { minutes: min++ }).toISOString();
-              post.reactions = {
-                thumbsUp: 0,
-                wow: 0,
-                heart: 0,
-                rocket: 0,
-                coffee: 0,
-              };
-              return post;
-            })
-          : [];
+        
+          
 
         // Add any fetched posts to the array
-        state.posts = state.posts.concat(loadedPosts);
+        state.posts = action.payload;
       })
 
       .addCase(fetchPosts.rejected, (state, action) => {
@@ -102,10 +70,10 @@ const postsSlice = createSlice({
         action.payload.date = new Date().toISOString();
         action.payload.reactions = {
           thumbsUp: 0,
-          hooray: 0,
+          wow: 0,
           heart: 0,
           rocket: 0,
-          cofe: 0,
+          coffee: 0,
         };
         console.log(action.payload);
         state.posts.push(action.payload);
@@ -117,6 +85,7 @@ const postsSlice = createSlice({
 export const selectAllPosts = (state) => state.posts.posts;
 export const getPostStatus = (state) => state.posts.status;
 export const getPostError = (state) => state.posts.error;
+
 
 export const { postAdded, reactionAdded } = postsSlice.actions;
 
