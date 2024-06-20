@@ -11,7 +11,7 @@ const PostExcerpt = ({ post }) => {
       <p>{post.body.substring(0, 100)}</p>
       <p className="postCredit">
         <PostAuthor userId={post.userId} />
-        <TimeAgo timestamp={post.date} />
+        <TimeAgo timestamp={post.createdAt} />
       </p>
       <ReactionButtons post={post} />
     </article>
