@@ -18,7 +18,7 @@ const AddPostForm = () => {
   const handleButtonClick = () => {
     if (canSave) {
       try {
-        setAddRequestStatus("pending");
+        setAddRequestStatus("loading");
         dispatch(addNewPost({ title, body: content, userId })).unwrap();
 
         setTitle("");

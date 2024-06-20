@@ -4,7 +4,6 @@ import TimeAgo from "./TimeAgo";
 import ReactionButtons from "./ReactionButtons";
 
 const PostExcerpt = ({ post }) => {
-    console.log("post", post);
   return (
     <article>
       <h3>{post.title}</h3>

@@ -15,8 +15,6 @@ const PostsList = () => {
   const error = useSelector(getPostError);
   const dispatch = useDispatch();
 
-  console.log("posts", posts);
-
   useEffect(() => {
     if (postStatus === "idle") {
       dispatch(fetchPosts());
