@@ -50,6 +50,12 @@ const postsSlice = createSlice({
   name: "posts",
   initialState: initialState,
   reducers: {},
+/**
+ * Defines the extra reducers for the posts slice.
+ *
+ * @param {Object} builder - The Redux Toolkit builder object.
+ * @return {void}
+ */
   extraReducers: (builder) => {
     builder
       .addCase(fetchPosts.pending, (state, action) => {
